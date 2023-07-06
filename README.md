@@ -8,4 +8,4 @@ technologies Laravel, Livewire, Jetstream et Bootstrap.
 L'administrateur peut gérer les élèves, les classes, les
 matières et les séances. Les enseignants gèrent la
 présence des élèves, tandis que les élèves et les parents
-peuvent consulter les informations de présence.
+peuvent consulter les informations de présence..
