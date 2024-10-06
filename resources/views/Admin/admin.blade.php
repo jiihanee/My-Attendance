@@ -1,6 +1,9 @@
+
 @extends('Master.layout')
 
 @extends('Admin.admin-dashboard')
+
+
 
 <title>Espace Administrateur</title>
 

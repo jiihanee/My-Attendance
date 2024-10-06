@@ -10,6 +10,9 @@ use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\AffElController;
 use App\Http\Controllers\AffPaController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,17 +23,22 @@ use App\Http\Controllers\AffPaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+require __DIR__.'/auth.php';
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('/redirects', [HomeController::class, "index"])->name('home');
 
 //Route::redirect(uri:'/login' ,destination:'login')->name('login');
+ 
 Route::middleware([
     'auth:sanctum',
-    config('jetstream.auth_session'),
+    config('jetstream.auth.login'),
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
