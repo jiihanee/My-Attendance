@@ -10,20 +10,21 @@ pipeline {
 
         stage('Install Composer Dependencies') {
             steps {
-                // Use the correct PHP path and install composer dependencies
-                bat '"C:/Program Files/php/php.exe" "C:/ProgramData/ComposerSetup/bin/composer.phar" install -v'
+                // Using Windows Batch script for composer installation
+                bat '"C:/ProgramData/ComposerSetup/bin/composer.phar" install -v'
             }
         }
 
         stage('Execute PHPUnit Tests') {
             steps {
-                // Run PHPUnit tests and log results
-                bat '"C:/Program Files/php/php.exe" "C:\\Users\\HP\\Desktop\\Projects\\devops\\My-Attendance\\vendor\\bin\\phpunit" --log-junit test-results.xml'
+                // Run PHPUnit tests
+                bat 'vendor\\bin\\phpunit --log-junit test-results.xml'
             }
         }
 
         stage('Publish Test Results') {
             steps {
+                // Publish the test results to Jenkins
                 junit 'test-results.xml'
             }
         }
