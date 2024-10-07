@@ -10,20 +10,27 @@ pipeline {
         
         stage('Install Composer Dependencies') {
             steps {
-                sh 'composer install -v'
+                bat 'composer install -v'
             }
         }
         
         stage('Execute PHPUnit Tests') {
             steps {
-                sh 'if [ -f ./vendor/bin/phpunit ]; then ./vendor/bin/phpunit; else echo "PHPUnit not found!"; exit 1; fi'
+                bat '''
+                if exist vendor\\bin\\phpunit (
+                    vendor\\bin\\phpunit
+                ) else (
+                    echo "PHPUnit not found!"
+                    exit /b 1
+                )
+                '''
             }
         }
         
         stage('Publish Test Results') {
             steps {
-                sh './vendor/bin/phpunit --log-junit test-reports/phpunit.xml'
-                junit 'test-reports/phpunit.xml'
+                bat 'vendor\\bin\\phpunit --log-junit test-reports\\phpunit.xml'
+                junit 'test-reports\\phpunit.xml'
             }
         }
     }
