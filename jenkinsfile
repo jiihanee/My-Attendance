@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Source Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ZJihane/My-Attendance.git'
+            }
+        }
+        
+        stage('Install Composer Dependencies') {
+            steps {
+                sh 'composer install -v'
+            }
+        }
+        
+        stage('Execute PHPUnit Tests') {
+            steps {
+                sh 'if [ -f ./vendor/bin/phpunit ]; then ./vendor/bin/phpunit; else echo "PHPUnit not found!"; exit 1; fi'
+            }
+        }
+        
+        stage('Publish Test Results') {
+            steps {
+                sh './vendor/bin/phpunit --log-junit test-reports/phpunit.xml'
+                junit 'test-reports/phpunit.xml'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo 'Tests passed!'
+        }
+        failure {
+            echo 'Tests failed!'
+        }
+    }
+}
