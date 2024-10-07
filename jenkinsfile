@@ -11,7 +11,7 @@ pipeline {
         stage('Install Composer Dependencies') {
             steps {
                 // Using Windows Batch script for composer installation
-                bat '"C:/ProgramData/ComposerSetup/bin" install -v'
+                bat '"C:/ProgramData/ComposerSetup/bin/composer.phar" install -v'
             }
         }
 
