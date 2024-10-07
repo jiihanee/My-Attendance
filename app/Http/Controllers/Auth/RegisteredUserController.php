@@ -13,6 +13,8 @@ use App\Providers\RouteServiceProvider; // Import RouteServiceProvider
 
 class RegisteredUserController extends Controller
 {
+    protected $redirectTo = '/dashboard'; // Redirect after registration
+
     /**
      * Display the registration view.
      *
@@ -43,7 +45,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect($this->redirectTo); // Use the redirectTo property
     }
 
     /**

@@ -35,16 +35,14 @@ Route::get('/', function () {
 Route::get('/redirects', [HomeController::class, "index"])->name('home');
 
 //Route::redirect(uri:'/login' ,destination:'login')->name('login');
+
  
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth.login'),
-    'verified'
-])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
 
 Route::prefix('Gestion/classes')->group(function () {
     Route::get('/', [ClasseController::class, 'index'])->name('classes');

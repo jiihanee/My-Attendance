@@ -28,20 +28,19 @@ class AuthenticatedSessionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-
+    
         if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended('/dashboard'); // Ensure this route is intended
         }
-
+    
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
+    
 
     /**
      * Destroy an authenticated session.
