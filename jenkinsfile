@@ -11,14 +11,14 @@ pipeline {
         stage('Install Composer Dependencies') {
             steps {
                 // Using Windows Batch script for composer installation
-                bat '"C:/ProgramData/ComposerSetup/bin/composer.phar" install -v'
+                bat 'composer install -v'
             }
         }
 
         stage('Execute PHPUnit Tests') {
             steps {
                 // Use phpunit.bat on Windows
-                bat '"C:\\xampp\\php\\php.exe" vendor\\bin\\phpunit.bat --log-junit test-results.xml'
+                bat 'vendor\\bin\\phpunit.bat --log-junit test-results.xml'
             }
         }
 
