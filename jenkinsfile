@@ -4,46 +4,35 @@ pipeline {
     stages {
         stage('Checkout Source Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/ZJihane/My-Attendance.git'
+                checkout scm
             }
         }
-        
+
         stage('Install Composer Dependencies') {
             steps {
-                bat 'composer install -v'
+                // Using Windows Batch script for composer installation
+                bat '"C:\ProgramData\ComposerSetup\bin" install -v'
             }
         }
-        
+
         stage('Execute PHPUnit Tests') {
             steps {
-                bat '''
-                if exist vendor\\bin\\phpunit (
-                    vendor\\bin\\phpunit
-                ) else (
-                    echo "PHPUnit not found!"
-                    exit /b 1
-                )
-                '''
+                // Run PHPUnit tests
+                bat 'vendor\\bin\\phpunit --log-junit test-results.xml'
             }
         }
-        
+
         stage('Publish Test Results') {
             steps {
-                bat 'vendor\\bin\\phpunit --log-junit test-reports\\phpunit.xml'
-                junit 'test-reports\\phpunit.xml'
+                // Publish the test results to Jenkins
+                junit 'test-results.xml'
             }
         }
     }
 
     post {
         always {
-            cleanWs()
-        }
-        success {
-            echo 'Tests passed!'
-        }
-        failure {
-            echo 'Tests failed!'
+            cleanWs() // Clean the workspace after the build
         }
     }
 }
