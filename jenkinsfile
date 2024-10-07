@@ -18,7 +18,7 @@ pipeline {
         stage('Execute PHPUnit Tests') {
             steps {
                 // Run PHPUnit tests
-                bat 'vendor\\bin\\phpunit --log-junit test-results.xml'
+                bat '"C:\\Users\\HP\\Desktop\\Projects\\devops\\My-Attendance\\vendor\\bin\\phpunit" --log-junit test-results.xml'
             }
         }
 
