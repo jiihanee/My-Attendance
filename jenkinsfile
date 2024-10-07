@@ -15,6 +15,20 @@ pipeline {
             }
         }
 
+        stage('Install Node.js Dependencies') {
+            steps {
+                // Navigate to the project directory and install Node.js dependencies
+                bat 'npm install'
+            }
+        }
+
+        stage('Build Assets') {
+            steps {
+                // Build the assets to generate the Vite manifest file
+                bat 'npm run build'
+            }
+        }
+
         stage('Execute PHPUnit Tests') {
             steps {
                 // Use phpunit.bat on Windows
