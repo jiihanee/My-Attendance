@@ -23,7 +23,7 @@
 				<div class="modal-content">
                         <div class="modal-header">
 						<br>  
-						<h5 class="modal-title">Ajouter une nouvelle Séance up up</h5>
+						<h5 class="modal-title">Ajouter une nouvelle Séance </h5>
 						<button class="btn-close" data-bs-dismiss="modal"></button>
 					</div> 
 
