@@ -1,17 +1,17 @@
 # Use an official PHP image with Apache
 FROM php:8.1-apache
 
-# Install required PHP extensions and unzip
-RUN apt-get update && \
-    apt-get install -y libzip-dev unzip && \
-    docker-php-ext-install pdo pdo_mysql zip
+# Install required PHP extensions and Git
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    && docker-php-ext-install pdo pdo_mysql
 
 # Enable Apache mod_rewrite for Laravel
 RUN a2enmod rewrite
 
-# Install Git, Node.js, and npm
-RUN apt-get install -y git curl && \
-    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+# Install Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs
 
 # Set the working directory
@@ -28,10 +28,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Install Node.js dependencies
 RUN npm install
-
-# Set proper permissions for Laravel public and storage folders
-RUN mkdir -p /var/www/html/public/build && \
-    chown -R www-data:www-data /var/www/html/public /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Build the front-end assets
 RUN npm run build
