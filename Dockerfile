@@ -1,14 +1,16 @@
 # Use an official PHP image with Apache
 FROM php:8.1-apache
 
-# Install required PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql
+# Install required PHP extensions and unzip
+RUN apt-get update && \
+    apt-get install -y libzip-dev unzip && \
+    docker-php-ext-install pdo pdo_mysql zip
 
 # Enable Apache mod_rewrite for Laravel
 RUN a2enmod rewrite
 
 # Install Git, Node.js, and npm
-RUN apt-get update && apt-get install -y git curl && \
+RUN apt-get install -y git curl && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs
 
