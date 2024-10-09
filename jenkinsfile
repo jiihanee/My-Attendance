@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = 'mylaravelapp:latest'
+        DOCKER_CREDENTIALS_ID = 'docker-credentials'
+    }
+
     stages {
         stage('Checkout Source Code') {
             steps {
@@ -8,45 +13,47 @@ pipeline {
             }
         }
 
-        stage('Install Composer Dependencies') {
+        stage('Login to Docker') {
             steps {
-                // Using Windows Batch script for composer installation
-                bat 'composer install -v'
+                script {
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        bat "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    }
+                }
             }
         }
 
-        stage('Install Node.js Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                // Navigate to the project directory and install Node.js dependencies
-                bat 'npm install'
+                script {
+                    // Build the Docker image using Docker Compose
+                    bat "docker-compose build"
+                }
             }
         }
 
-        stage('Build Assets') {
+        stage('Deploy with Docker Compose') {
             steps {
-                // Build the assets to generate the Vite manifest file
-                bat 'npm run build'
+                script {
+                    // Start the containers using Docker Compose
+                    bat "docker-compose up -d"
+                }
             }
         }
 
-        stage('Execute PHPUnit Tests') {
+        stage('Run Migrations') {
             steps {
-                // Use phpunit.bat on Windows
-                bat 'vendor\\bin\\phpunit.bat --log-junit test-results.xml'
-            }
-        }
-
-        stage('Publish Test Results') {
-            steps {
-                // Publish the test results to Jenkins
-                junit 'test-results.xml'
+                script {
+                    // Run migrations inside the Laravel container
+                    bat "docker-compose exec app php artisan migrate --force"
+                }
             }
         }
     }
 
     post {
         always {
-            cleanWs() // Clean the workspace after the build
+            cleanWs()
         }
     }
 }
