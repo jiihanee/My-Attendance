@@ -6,7 +6,7 @@ services:
       - "80:80"
     volumes:
       - .:/var/www/html
-    environment: # Enlève les variables d'environnement liées à la base de données
+    environment: 
       DB_CONNECTION: null
       DB_HOST: null
       DB_PORT: null
