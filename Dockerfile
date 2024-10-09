@@ -29,6 +29,10 @@ RUN composer install --no-dev --optimize-autoloader
 # Install Node.js dependencies
 RUN npm install
 
+# Set proper permissions for Laravel public and storage folders
+RUN mkdir -p /var/www/html/public/build && \
+    chown -R www-data:www-data /var/www/html/public /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Build the front-end assets
 RUN npm run build
 
