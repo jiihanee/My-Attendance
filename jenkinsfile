@@ -13,6 +13,41 @@ pipeline {
             }
         }
 
+        stage('Install Composer Dependencies') {
+            steps {
+                // Using Windows Batch script for composer installation
+                bat 'composer install -v'
+            }
+        }
+
+        stage('Install Node.js Dependencies') {
+            steps {
+                // Navigate to the project directory and install Node.js dependencies
+                bat 'npm install'
+            }
+        }
+
+        stage('Build Assets') {
+            steps {
+                // Build the assets to generate the Vite manifest file
+                bat 'npm run build'
+            }
+        }
+
+        stage('Execute PHPUnit Tests') {
+            steps {
+                // Use phpunit.bat on Windows
+                bat 'vendor\\bin\\phpunit.bat --log-junit test-results.xml'
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                // Publish the test results to Jenkins
+                junit 'test-results.xml'
+            }
+        }
+
         stage('Login to Docker') {
             steps {
                 script {
@@ -37,15 +72,6 @@ pipeline {
                 script {
                     // Start the containers using Docker Compose
                     bat "docker-compose up -d"
-                }
-            }
-        }
-
-        stage('Run Migrations') {
-            steps {
-                script {
-                    // Run migrations inside the Laravel container
-                    bat "docker-compose exec app php artisan migrate --force"
                 }
             }
         }

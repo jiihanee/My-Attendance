@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   app:
     build: .
@@ -5,23 +6,13 @@ services:
       - "80:80"
     volumes:
       - .:/var/www/html
-    depends_on:
-      - db
-    environment:
-      DB_CONNECTION: mysql
-      DB_HOST: db            # Use service name here
-      DB_PORT: 3306
-      DB_DATABASE: myattendance
-      DB_USERNAME: root
-      DB_PASSWORD: root      # Add your root password here
-  
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_DATABASE: myattendance  # Match this with your DB_DATABASE
-      MYSQL_ROOT_PASSWORD: root      # This password should match the one in the app service
-    volumes:
-      - dbdata:/var/lib/mysql
+    environment: # Enlève les variables d'environnement liées à la base de données
+      DB_CONNECTION: null
+      DB_HOST: null
+      DB_PORT: null
+      DB_DATABASE: null
+      DB_USERNAME: null
+      DB_PASSWORD: null
 
 volumes:
-  dbdata:
+  
