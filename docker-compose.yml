@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build: .
@@ -16,9 +14,7 @@ services:
       DB_DATABASE: myattendance
       DB_USERNAME: root
       DB_PASSWORD: root      # Add your root password here
-    networks:
-      - mynetwork
-
+  
   db:
     image: mysql:8.0
     environment:
@@ -26,14 +22,6 @@ services:
       MYSQL_ROOT_PASSWORD: root      # This password should match the one in the app service
     volumes:
       - dbdata:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    networks:
-      - mynetwork
 
 volumes:
   dbdata:
-
-networks:
-  mynetwork:
-    driver: bridge
