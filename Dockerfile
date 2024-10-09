@@ -29,11 +29,11 @@ RUN composer install --no-dev --optimize-autoloader
 # Install Node.js dependencies
 RUN npm install
 
+# Set permissions for Laravel (including public directory)
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
+
 # Build the front-end assets
 RUN npm run build
-
-# Set permissions for Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Expose the web server port
 EXPOSE 80
