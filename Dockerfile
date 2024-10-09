@@ -7,7 +7,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Enable Apache mod_rewrite for Laravel
 RUN a2enmod rewrite
 
-# Install Node.js and npm
+# Install Node.js & npm
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs
 
