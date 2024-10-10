@@ -7,7 +7,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     @section('navlinks')
                    <x-nav-link href="{{ route('InfosEleve') }}" :active="request()->routeIs('InfosEleve')">
-                   <i class="fa-regular fa-id-card"></i>&nbsp;  {{ __('Mes Infos') }}
+                   <i class="fa-regular fa-id-card"></i>&nbsp;  {{ __('Mes Informations') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('maPresence') }}" :active="request()->routeIs('maPresence')">
                     <i class="fa-solid fa-check"></i>&nbsp;   {{ __('Rapport Présence') }}
