@@ -42,7 +42,7 @@ Espace Parent
                     
                 </tbody>
             </table>
-            <h6> En cas de changement de coordonnées, veuillez informer l'administrateur de l'établissement  .</h6><br><br>
+            <h6> En cas de changement de coordonnées veuillez informer l'administrateur de l'établissement  .</h6><br><br>
             </div>
             </div>
 @endsection
