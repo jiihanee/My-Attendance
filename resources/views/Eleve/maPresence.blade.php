@@ -55,7 +55,7 @@
 
                             <br><br>
 
-                            <b>le rapport de présence d'un mois :</b><br><br>
+                            <b>le rapport de présence d'un mois </b><br><br>
                             <a type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#m_affiche_mois">Choisir Mois</a>
 
                             <div id="m_affiche_mois" class="modal">
