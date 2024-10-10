@@ -10,7 +10,7 @@
                    <i class="fa-regular fa-id-card"></i>&nbsp;  {{ __('Mes Informations') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('maPresence') }}" :active="request()->routeIs('maPresence')">
-                    <i class="fa-solid fa-check"></i>&nbsp;   {{ __('Rapport Présence') }}
+                    <i class="fa-solid fa-check"></i>&nbsp;   {{ __('Rapport de Présence') }}
                     </x-nav-link>
                    
                     @endsection
