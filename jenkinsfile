@@ -22,7 +22,7 @@ pipeline {
 
         stage('Install Node.js Dependencies') {
             steps {
-                // Navigate to the project directory qnd install Node.js dependencies
+                // Navigate to the project directory and install Node.js dependencies
                 bat 'npm install'
             }
         }
