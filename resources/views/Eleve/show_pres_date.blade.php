@@ -9,7 +9,7 @@
 <br>
 
 <div class="container mt-3">
-<h4>   Rapport de présence du : {{ $date }}</h4> <br>
+<h4>   Rapport de présence du  {{ $date }}</h4> <br>
     <table class="table table-striped">
     
         <thead>
