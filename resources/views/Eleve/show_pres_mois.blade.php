@@ -7,7 +7,7 @@
 
 @section('content2')
     <div class="container mt-3">
-    <h4>   Rapport de présence du mois: {{ $month_year }}</h4> <br>
+    <h4>   Rapport de présence du mois {{ $month_year }}</h4> <br>
         <table class="table table-striped">
             <thead>
                 <tr>
