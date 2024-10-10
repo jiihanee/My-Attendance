@@ -16,7 +16,7 @@
                     <div class="card-header">Veuillez Choisir</div>
                     <div class="card-body">
                         <div class="text-center">
-                            <b>le rapport de présence d'un jour précis :</b><br><br>
+                            <b>le rapport de présence d'un jour précis </b><br><br>
                             <!-- Modal pour la date -->
                             <a type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#m_affiche_date">Choisir Jour</a>
 
